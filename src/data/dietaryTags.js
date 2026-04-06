@@ -1,0 +1,1 @@
+export const dietaryTags = ["Veg", "Non-Veg", "Jain", "Vegan"];
