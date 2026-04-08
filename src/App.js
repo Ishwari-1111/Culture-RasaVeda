@@ -18,7 +18,7 @@ import DietaryFilter from "./features/DietaryFilter";
 import FoodStories from "./features/FoodStories";
 import MultilingualSupport from "./features/MultilingualSupport";
 import ChefSpotlights from "./features/ChefSpotlights";
-import ReligionModule from "./features/ReligionModule";
+import SacredHeritageModule from "./features/SacredHeritageModule";
 
 export default function App() {
   return (
@@ -40,7 +40,7 @@ export default function App() {
         <Route path="/stories" element={<FoodStories />} />
         <Route path="/multilingual" element={<MultilingualSupport />} />
         <Route path="/chefs" element={<ChefSpotlights />} />
-        <Route path="/religion" element={<ReligionModule />} />
+        <Route path="/religion" element={<SacredHeritageModule />} />
       </Routes>
     </BrowserRouter>
   );

@@ -55,12 +55,6 @@ export default function ChefSpotlights() {
   ✔ Clean grid layout
   ✔ Optional filtering works
 
-  ---------------------------------------------------------
-   DO NOT:
-  - Add backend
-  - Add image upload feature
-  - Modify data structure
-
   =========================================================
   */
 
