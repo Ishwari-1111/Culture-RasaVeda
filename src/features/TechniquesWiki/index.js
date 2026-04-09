@@ -3,49 +3,151 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 
 export default function TechniquesWiki() {
-  /*
-=========================================================
- FEATURE: Cooking Techniques Wiki
-=========================================================
+  const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState(null);
 
- GOAL:
-Display cooking techniques in a wiki-style page.
+  // 📚 Static dataset
+  const techniques = [
+    {
+      id: 1,
+      title: "Dum",
+      description: "Slow cooking in a sealed pot using steam.",
+      cookware: "Handi",
+      region: "North India",
+      difficulty: "Medium",
+      steps: ["Seal pot", "Cook on low heat", "Let steam build"],
+      recipes: ["Biryani", "Dum Aloo"],
+    },
+    {
+      id: 2,
+      title: "Tadka",
+      description: "Tempering spices in hot oil or ghee.",
+      cookware: "Pan",
+      region: "All India",
+      difficulty: "Easy",
+      steps: ["Heat oil", "Add spices", "Pour over dish"],
+      recipes: ["Dal Tadka"],
+    },
+    {
+      id: 3,
+      title: "Bhuna",
+      description: "Cooking spices in oil until aromatic.",
+      cookware: "Kadai",
+      region: "North India",
+      difficulty: "Medium",
+      steps: ["Heat oil", "Add spices", "Cook till fragrant"],
+      recipes: ["Chicken Bhuna"],
+    },
+  ];
 
----------------------------------------------------------
- REQUIREMENTS:
-1. Static dataset
-2. Each technique has:
-   - title
-   - description
+  // 🔍 Filter logic
+  const filtered = techniques.filter((t) =>
+    t.title.toLowerCase().includes(search.toLowerCase()),
+  );
 
----------------------------------------------------------
- IMPLEMENTATION STEPS:
+  // 📄 DETAIL VIEW
+  if (selected) {
+    return (
+      <div className="page">
+        <button className="page-back" onClick={() => setSelected(null)}>
+          ← Back
+        </button>
 
-STEP 1 — Create data array
+        <h1 className="page-title">{selected.title}</h1>
+        <p className="page-sub">{selected.description}</p>
 
-STEP 2 — Render list of techniques
+        <div style={{ marginTop: "1.5rem" }}>
+          <h3>Cookware</h3>
+          <p>{selected.cookware}</p>
 
----------------------------------------------------------
- EXPECTED OUTPUT:
+          <h3>Region</h3>
+          <p>{selected.region}</p>
 
-✔ List of techniques visible
-✔ Clean readable layout
+          <h3>Recipes</h3>
+          <ul>
+            {selected.recipes.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
 
----------------------------------------------------------
- DO NOT:
-- Add CMS
-=========================================================
-*/
+          <h3>Steps</h3>
+          <div style={{ marginTop: "10px" }}>
+            {selected.steps.map((s, i) => (
+              <div
+                key={i}
+                style={{ display: "flex", gap: 10, marginBottom: 8 }}
+              >
+                <span
+                  style={{
+                    background: "#ff9933",
+                    borderRadius: "50%",
+                    width: 22,
+                    height: 22,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 12,
+                    color: "#000",
+                  }}
+                >
+                  {i + 1}
+                </span>
+                <p>{s}</p>
+              </div>
+            ))}
+          </div>
+
+          <h3>Difficulty</h3>
+          <span className="tag">{selected.difficulty}</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 📋 LIST VIEW
   return (
-    <div className="feature-page">
-      <h1>Cooking Techniques Wiki</h1>
-
-      <div className="todo-box">
-        <p>Wiki-style listing + detail view</p>
+    <div className="page">
+      <div className="page-header">
+        <Link to="/" className="page-back">
+          ← Back to Home
+        </Link>
+        <h1 className="page-title">Cooking Techniques Wiki</h1>
+        <p className="page-sub">Wiki-style listing + detail view</p>
       </div>
 
-      <div className="placeholder">📚 TechniqueList</div>
-      <div className="placeholder">📄 TechniqueDetail</div>
+      {/* 🔍 SEARCH */}
+      <input
+        placeholder="Search techniques..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{
+          width: "100%",
+          marginBottom: "1.5rem",
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,153,51,0.15)",
+          borderRadius: 999,
+          padding: "8px 16px",
+          fontSize: "0.82rem",
+          color: "#f5e6cc",
+          outline: "none",
+        }}
+      />
+
+      {/* 📚 LIST */}
+      <div className="grid">
+        {filtered.map((t) => (
+          <div key={t.id} className="card" onClick={() => setSelected(t)}>
+            <div className="card-body">
+              <div className="card-title">{t.title}</div>
+              <div className="card-sub">{t.region}</div>
+              <p style={{ fontSize: "0.75rem", opacity: 0.6 }}>
+                {t.description}
+              </p>
+              <span className="tag">{t.difficulty}</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
