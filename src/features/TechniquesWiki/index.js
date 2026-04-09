@@ -13,30 +13,37 @@ export default function TechniquesWiki() {
       title: "Dum",
       description: "Slow cooking in a sealed pot using steam.",
       cookware: "Handi",
-      region: "North India",
+      regions: ["North India", "Hyderabad"],
+      recipes: ["Biryani", "Dum Aloo"],
       difficulty: "Medium",
       steps: ["Seal pot", "Cook on low heat", "Let steam build"],
-      recipes: ["Biryani", "Dum Aloo"],
     },
+
     {
       id: 2,
       title: "Tadka",
-      description: "Tempering spices in hot oil or ghee.",
-      cookware: "Pan",
-      region: "All India",
+      description: "Tempering spices in hot oil or ghee to enhance flavor.",
+      cookware: "Pan / Tadka ladle",
+      regions: ["All India", "North India", "West India"],
+      recipes: ["Dal Tadka", "Jeera Rice", "Khichdi"],
       difficulty: "Easy",
-      steps: ["Heat oil", "Add spices", "Pour over dish"],
-      recipes: ["Dal Tadka"],
+      steps: ["Heat oil or ghee", "Add spices", "Pour over dish"],
     },
+
     {
       id: 3,
       title: "Bhuna",
-      description: "Cooking spices in oil until aromatic.",
+      description:
+        "Cooking spices and ingredients in oil until aromatic and well blended.",
       cookware: "Kadai",
-      region: "North India",
+      regions: ["North India", "Pakistan", "Bangladesh"],
+      recipes: ["Chicken Bhuna", "Bhuna Gosht", "Paneer Bhurji"],
       difficulty: "Medium",
-      steps: ["Heat oil", "Add spices", "Cook till fragrant"],
-      recipes: ["Chicken Bhuna"],
+      steps: [
+        "Heat oil",
+        "Add spices",
+        "Cook until fragrant and oil separates",
+      ],
     },
   ];
 
@@ -60,12 +67,16 @@ export default function TechniquesWiki() {
           <h3>Cookware</h3>
           <p>{selected.cookware}</p>
 
-          <h3>Region</h3>
-          <p>{selected.region}</p>
-
-          <h3>Recipes</h3>
+          <h3>Regions</h3>
           <ul>
-            {selected.recipes.map((r) => (
+            {(selected.regions || []).map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+
+          <h3>Recipes Using This Technique</h3>
+          <ul>
+            {(selected.recipes || []).map((r) => (
               <li key={r}>{r}</li>
             ))}
           </ul>
